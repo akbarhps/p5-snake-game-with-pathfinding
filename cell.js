@@ -46,12 +46,13 @@ function Cell(x, y) {
     this.draw = (type) => {
         strokeWeight(1);
         stroke(255);
-        if (type === 'food') {
-            fill(0, 255, 0);
-        } else if (type === 'body') {
+        fill(0);
+        if (type === 'body') {
             fill(255, 0, 0);
-        } else {
-            fill(0);
+        } else if (type === 'path') {
+            fill(0, 160, 0, 160)
+        } else if (type === 'food') {
+            fill(255, 255, 0);
         }
         rect(this.y * cellSize, this.x * cellSize, cellSize, cellSize);
     };

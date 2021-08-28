@@ -65,6 +65,7 @@ function retracePath(cell) {
     const head = snakeBody[0];
     let lastCell = cell.parent;
     while (lastCell != null && lastCell !== head) {
+        lastCell.draw('path');
         bfsMoves.push(lastCell);
         lastCell = lastCell.parent;
     }
