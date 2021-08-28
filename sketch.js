@@ -16,6 +16,10 @@ function setup() {
     createCanvas(canvasSize, canvasSize).parent('view');
     cellSize = Math.floor(canvasSize / gridRow);
 
+    select("#openGithub").mousePressed(() => {
+        window.open('https://www.github.com/akbarhps', '_blank');
+    });
+
     resetProgress();
     frameRateListener();
 }
