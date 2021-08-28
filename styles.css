@@ -11,11 +11,38 @@ body {
 #container {
     height: 100%;
     display: grid;
-    grid-template-rows: 0px auto;
+    grid-template-rows: auto 10%;
 }
 
 #container > div {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+button, input {
+    color: black;
+    font-size: 16px;
+    padding: 10px;
+    margin: 0 5px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid slategrey;
+    border-radius: 4px;
+}
+
+span {
+    color: white;
+}
+
+input {
+    padding: 10px 1px;
+    width: 100px;
+    height: auto;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
 }
