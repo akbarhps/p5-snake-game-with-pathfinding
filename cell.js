@@ -2,8 +2,20 @@ function Cell(x, y) {
     this.x = x;
     this.y = y;
     this.parent = null;
-    this.isVisited = false;
     this.isBody = false;
+    this.isVisited = false;
+
+    this.gCost = 0;
+    this.hCost = 0;
+    this.fCost = () => {
+        return this.gCost + this.hCost;
+    }
+
+    this.calculateDistance = (to) => {
+        let distX = Math.abs(this.x - to.x);
+        let distY = Math.abs(this.y - to.y);
+        return (14 * min(distX, distY)) + (10 * (max(distX, distY)));
+    }
 
     this.findNeighbors = () => {
         let neighbors = [];

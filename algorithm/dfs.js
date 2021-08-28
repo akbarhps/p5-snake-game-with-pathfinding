@@ -1,5 +1,3 @@
-let found = false;
-
 function dfs() {
     found = false;
     visitNeighbors(snakeBody[0]);

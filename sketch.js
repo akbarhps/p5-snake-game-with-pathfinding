@@ -10,6 +10,7 @@ let gridColumn = 20;
 let foodCell;
 let snakeBody = [];
 let snakeMoves = [];
+let found = false;
 
 function setup() {
     frameRate(10);
@@ -31,6 +32,9 @@ function draw() {
                 break;
             case "dfs":
                 dfs();
+                break;
+            case "astar":
+                AStar();
                 break;
         }
     } else {
