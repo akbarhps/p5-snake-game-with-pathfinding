@@ -1,5 +1,5 @@
-# [p5-snake-game-with-bfs](https://akbarhps.github.io/p5-snake-game-with-bfs/)
+# [p5-snake-game-with-pathfinding](https://akbarhps.github.io/p5-snake-game-with-pathfinding/)
 
-Breadth First Search implementation in Snake Game
+Pathfinding algorithm implementation in a snake game
 
-![Screenshot](https://user-images.githubusercontent.com/69947442/131209816-e51260fe-eb7a-4605-b14c-12181afa24c7.png)
+![Screenshot](https://user-images.githubusercontent.com/69947442/131215686-8ab5f48b-8d0c-4715-a97f-94077b11d520.png)
