@@ -16,8 +16,13 @@
 <div id="container">
     <div id="view"></div>
     <div id="controller">
-        <span>Frame Rate (FPS): </span>
+        <span>Frame Rate: </span>
         <input id="frameRate" type="number" min="10" max="60" value="10" />
+        <select id="mode" name="mode">
+            <option value="bfs">Bredth-First Search</option>
+            <option value="dfs">Deep First Search</option>
+        </select>
+        <button id="play">Run 🏃‍♂</button>
         <button id="openGithub">🤖 Github</button>
     </div>
 </div>

@@ -20,7 +20,7 @@ body {
     align-items: center;
 }
 
-button, input {
+button, input, select {
     color: black;
     font-size: 16px;
     padding: 10px;
@@ -37,11 +37,17 @@ span {
 
 input {
     padding: 10px 1px;
-    width: 100px;
+    width: 60px;
     height: auto;
 }
 
 button:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+.active {
     background-color: black;
     color: white;
     border: 2px solid white;

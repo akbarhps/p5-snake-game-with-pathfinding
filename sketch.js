@@ -26,11 +26,11 @@ function setup() {
 
 function draw() {
     foodCell.draw('food');
-    if (bfsMoves.length === 0) {
-        bfs();
-    } else {
-        updateSnake();
-    }
+    // if (bfsMoves.length === 0) {
+    //     bfs();
+    // } else {
+    //     updateSnake();
+    // }
 }
 
 function bfs() {
