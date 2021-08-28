@@ -3,13 +3,14 @@ function Cell(x, y) {
     this.y = y;
     this.parent = null;
     this.isVisited = false;
+    this.isBody = false;
 
     this.findNeighbors = () => {
         let neighbors = [];
         let current;
         if (y < gridRow - 1) {
             current = grid[y + 1][x];
-            if (!current.isVisited) {
+            if (!current.isVisited && !current.isBody) {
                 current.isVisited = true;
                 current.parent = this;
                 neighbors.push(current);
@@ -17,7 +18,7 @@ function Cell(x, y) {
         }
         if (y > 0) {
             current = grid[y - 1][x];
-            if (!current.isVisited) {
+            if (!current.isVisited && !current.isBody) {
                 current.isVisited = true;
                 current.parent = this;
                 neighbors.push(current);
@@ -25,7 +26,7 @@ function Cell(x, y) {
         }
         if (x < gridColumn - 1) {
             current = grid[y][x + 1];
-            if (!current.isVisited) {
+            if (!current.isVisited && !current.isBody) {
                 current.isVisited = true;
                 current.parent = this;
                 neighbors.push(current);
@@ -33,7 +34,7 @@ function Cell(x, y) {
         }
         if (x > 0) {
             current = grid[y][x - 1];
-            if (!current.isVisited) {
+            if (!current.isVisited && !current.isBody) {
                 current.isVisited = true;
                 current.parent = this;
                 neighbors.push(current);
