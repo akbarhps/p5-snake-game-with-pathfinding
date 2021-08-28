@@ -48,7 +48,8 @@ function Cell(x, y) {
         stroke(255);
         fill(0);
         if (type === 'body') {
-            fill(255, 0, 0);
+            fill(255);
+            stroke(0);
         } else if (type === 'path') {
             fill(0, 160, 0, 160)
         } else if (type === 'food') {
