@@ -1,13 +1,15 @@
 let canvasSize;
 let cellSize;
 
+let mode = "bfs";
+
 let grid = [];
 let gridRow = 20;
 let gridColumn = 20;
 
 let foodCell;
 let snakeBody = [];
-let bfsMoves = [];
+let snakeMoves = [];
 
 function setup() {
     frameRate(10);
@@ -16,61 +18,39 @@ function setup() {
     createCanvas(canvasSize, canvasSize).parent('view');
     cellSize = Math.floor(canvasSize / gridRow);
 
-    select("#openGithub").mousePressed(() => {
-        window.open('https://www.github.com/akbarhps', '_blank');
-    });
-
+    setupUI();
     resetProgress();
-    frameRateListener();
 }
 
 function draw() {
     foodCell.draw('food');
-    // if (bfsMoves.length === 0) {
-    //     bfs();
-    // } else {
-    //     updateSnake();
-    // }
-}
-
-function bfs() {
-    let snakeHead = snakeBody[0];
-    let currentSet = [snakeHead];
-
-    while (true) {
-        let nextSet = [];
-        for (let cell of currentSet) {
-            nextSet.push(...cell.findNeighbors());
+    if (snakeMoves.length === 0) {
+        switch (mode) {
+            case "bfs":
+                bfs()
+                break;
+            case "dfs":
+                dfs();
+                break;
         }
-
-        if (nextSet.length === 0) {
-            resetProgress();
-            return;
-        }
-
-        currentSet = nextSet;
-        for (let cell of currentSet) {
-            if (cell === foodCell) {
-                retracePath(cell);
-                return;
-            }
-        }
+    } else {
+        updateSnake();
     }
 }
 
 function retracePath(cell) {
-    bfsMoves = [];
-    bfsMoves.push(cell);
+    snakeMoves = [];
+    snakeMoves.push(cell);
 
     const head = snakeBody[0];
     let lastCell = cell.parent;
     while (lastCell != null && lastCell !== head) {
         lastCell.draw('path');
-        bfsMoves.push(lastCell);
+        snakeMoves.push(lastCell);
         lastCell = lastCell.parent;
     }
 
-    bfsMoves.reverse();
+    snakeMoves.reverse();
     resetGridVisited();
 }
 
@@ -85,9 +65,9 @@ function resetGridVisited() {
 
 function updateSnake() {
     const tail = snakeBody[snakeBody.length - 1];
-    const head = bfsMoves[0];
+    const head = snakeMoves[0];
 
-    bfsMoves.shift();
+    snakeMoves.shift();
     snakeBody.unshift(head);
     head.isBody = true;
 
@@ -111,33 +91,37 @@ function generateFood() {
     foodCell = grid[randY][randX];
 }
 
-function frameRateListener() {
-    let sizeInput = document.getElementById('frameRate');
-    sizeInput.addEventListener('input', (event) => {
-        let value = Number(event.target.value);
-        if (value < 10) {
-            value = 10;
-        } else if (value > 60) {
-            value = 60;
-        }
-        frameRate(value);
-    });
-}
-
 function resetProgress() {
     grid = [];
     for (let y = 0; y < gridRow; y++) {
         let cols = [];
         for (let x = 0; x < gridColumn; x++) {
             const cell = new Cell(x, y);
-            cols.push(cell);
             cell.draw();
+            cols.push(cell);
         }
         grid.push(cols);
     }
 
-    bfsMoves = [];
+    snakeMoves = [];
     foodCell = grid[Math.floor(random(gridRow))][Math.floor(random(gridColumn))];
     snakeBody = [grid[Math.floor(random(gridRow))][Math.floor(random(gridColumn))]];
     snakeBody[0].isBody = true;
+    loop();
+}
+
+function setupUI() {
+    document.getElementById('frameRate').addEventListener('input', (event) => {
+        let value = Number(event.target.value);
+        if (value < 10) value = 10;
+        else if (value > 60) value = 60;
+        frameRate(value);
+    });
+
+    document.getElementById('mode').addEventListener('input', (event) => {
+        mode = event.target.value;
+    });
+
+    select("#reset").mousePressed(resetProgress);
+    select("#openGithub").mousePressed(() => window.open('https://www.github.com/akbarhps', '_blank'));
 }
