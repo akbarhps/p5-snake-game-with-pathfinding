@@ -52,3 +52,17 @@ button:hover {
     color: white;
     border: 2px solid white;
 }
+
+#dialog {
+    visibility: hidden;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    bottom: 0;
+    height: 40px;
+    background-color: white;
+}
+
+.visible {
+    visibility: visible !important;
+}

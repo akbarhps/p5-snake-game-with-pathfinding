@@ -66,7 +66,17 @@ function Cell(x, y) {
             fill(0, 160, 0, 160)
         } else if (type === 'food') {
             fill(255, 255, 0);
+        } else if (type === 'head') {
+            fill(255, 0, 0);
+            stroke(0);
         }
         rect(this.y * cellSize, this.x * cellSize, cellSize, cellSize);
     };
+
+    this.undraw = () => {
+        strokeWeight(1);
+        stroke(255);
+        fill(0);
+        rect(this.y * cellSize, this.x * cellSize, cellSize, cellSize);
+    }
 }

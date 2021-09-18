@@ -2,19 +2,20 @@ let openSet = [];
 let closedSet = [];
 let currentCell = undefined;
 
-function AStar() {
+function astar() {
     found = false;
     openSet = [snakeBody[0]];
     closedSet = [];
     currentCell = undefined;
+    resetGridVisited();
 
     while (openSet.length > 0) {
-        if(found) break;
+        if (found) break;
         find();
     }
 
     if (found) retracePath(currentCell);
-    else noLoop();
+    else toggleDialog(true);
 }
 
 function find() {

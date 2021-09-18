@@ -25,19 +25,46 @@ function setup() {
 
 function draw() {
     foodCell.draw('food');
-    if (snakeMoves.length === 0) {
-        switch (mode) {
-            case "bfs":
-                bfs()
-                break;
-            case "dfs":
-                dfs();
-                break;
-            case "astar":
-                AStar();
-                break;
-        }
+    if (snakeMoves.length == 0) {
+        findPath();
     } else {
+        updateSnake();
+    }
+    if (found) toggleDialog(false);
+    else if (snakeMoves.length == 0) {
+        if (keyIsDown(37)) {
+            addSnakeMoves(0, -1);
+        } else if (keyIsDown(38)) {
+            addSnakeMoves(-1, 0);
+        } else if (keyIsDown(39)) {
+            addSnakeMoves(0, 1);
+        } else if (keyIsDown(40)) {
+            addSnakeMoves(1, 0);
+        }
+    }
+}
+
+function findPath() {
+    switch (mode) {
+        case "bfs":
+            bfs()
+            break;
+        case "dfs":
+            dfs();
+            break;
+        case "astar":
+            astar();
+            break;
+    }
+}
+
+function addSnakeMoves(x, y) {
+    let head = snakeBody[0];
+    let current = { x: head.x + x, y: head.y + y };
+
+    let outOfGrid = current.y < 0 || current.y >= gridRow || current.x < 0 || current.x >= gridColumn;
+    if (!outOfGrid && !snakeBody.includes(grid[current.y][current.x])) {
+        snakeMoves.push(grid[current.y][current.x]);
         updateSnake();
     }
 }
@@ -48,6 +75,7 @@ function retracePath(cell) {
 
     const head = snakeBody[0];
     let lastCell = cell.parent;
+
     while (lastCell != null && lastCell !== head) {
         lastCell.draw('path');
         snakeMoves.push(lastCell);
@@ -55,7 +83,6 @@ function retracePath(cell) {
     }
 
     snakeMoves.reverse();
-    resetGridVisited();
 }
 
 function resetGridVisited() {
@@ -68,6 +95,7 @@ function resetGridVisited() {
 }
 
 function updateSnake() {
+    snakeBody[0].draw('body');
     const tail = snakeBody[snakeBody.length - 1];
     const head = snakeMoves[0];
 
@@ -83,7 +111,7 @@ function updateSnake() {
         snakeBody.pop();
     }
 
-    head.draw('body');
+    head.draw('head');
 }
 
 function generateFood() {
@@ -128,4 +156,9 @@ function setupUI() {
 
     select("#reset").mousePressed(resetProgress);
     select("#openGithub").mousePressed(() => window.open('https://www.github.com/akbarhps', '_blank'));
+}
+
+function toggleDialog(show) {
+    if (show) select('#dialog').addClass('visible');
+    else select('#dialog').removeAttribute('class');
 }

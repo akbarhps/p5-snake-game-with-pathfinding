@@ -1,7 +1,9 @@
 function dfs() {
     found = false;
     visitNeighbors(snakeBody[0]);
-    if(!found) noLoop();
+    resetGridVisited();
+
+    if (!found) toggleDialog(true);
 }
 
 function visitNeighbors(cell) {

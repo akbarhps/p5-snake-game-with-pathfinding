@@ -1,5 +1,6 @@
 function bfs() {
     let currentSet = [snakeBody[0]];
+    resetGridVisited();
 
     while (true) {
         let nextSet = [];
@@ -8,7 +9,7 @@ function bfs() {
         }
 
         if (nextSet.length === 0) {
-            noLoop();
+            if (!found) toggleDialog(true);
             return;
         }
 
