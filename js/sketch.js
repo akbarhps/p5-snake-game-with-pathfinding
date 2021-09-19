@@ -30,8 +30,7 @@ function draw() {
     } else {
         updateSnake();
     }
-    if (found) toggleDialog(false);
-    else if (snakeMoves.length == 0) {
+    if (snakeMoves.length == 0) {
         if (keyIsDown(37)) {
             addSnakeMoves(0, -1);
         } else if (keyIsDown(38)) {
@@ -41,6 +40,8 @@ function draw() {
         } else if (keyIsDown(40)) {
             addSnakeMoves(1, 0);
         }
+    } else {
+        toggleDialog(false);
     }
 }
 
